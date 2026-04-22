@@ -1,0 +1,56 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="bookstore-er" name="Bookstore API ER">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="users" value="users&lt;br&gt;&lt;br&gt;PK id&lt;br&gt;name&lt;br&gt;email UNIQUE&lt;br&gt;password&lt;br&gt;role" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="190" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="authors" value="authors&lt;br&gt;&lt;br&gt;PK id&lt;br&gt;name&lt;br&gt;biography&lt;br&gt;email" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="80" y="360" width="190" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="books" value="books&lt;br&gt;&lt;br&gt;PK id&lt;br&gt;title&lt;br&gt;isbn UNIQUE&lt;br&gt;price&lt;br&gt;stock&lt;br&gt;FK author_id" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="330" width="200" height="190" as="geometry"/>
+        </mxCell>
+        <mxCell id="categories" value="categories&lt;br&gt;&lt;br&gt;PK id&lt;br&gt;name UNIQUE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="760" y="560" width="190" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="book_categories" value="book_categories&lt;br&gt;&lt;br&gt;PK/FK book_id&lt;br&gt;PK/FK category_id" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="750" y="330" width="210" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="orders" value="orders&lt;br&gt;&lt;br&gt;PK id&lt;br&gt;FK user_id&lt;br&gt;status&lt;br&gt;total&lt;br&gt;created_at" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="80" width="200" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="order_items" value="order_items&lt;br&gt;&lt;br&gt;PK id&lt;br&gt;FK order_id&lt;br&gt;FK book_id&lt;br&gt;quantity&lt;br&gt;unit_price&lt;br&gt;subtotal" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="760" y="80" width="210" height="190" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_user_orders" value="1:N" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="users" target="orders">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_order_items" value="1:N" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="orders" target="order_items">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_item_book" value="N:1" style="endArrow=ERone;startArrow=ERmany;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="order_items" target="books">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="860" y="425"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_author_books" value="1:N" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="authors" target="books">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_book_join" value="1:N" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="books" target="book_categories">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_category_join" value="1:N" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="categories" target="book_categories">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="note_many_to_many" value="books N:M categories mediante book_categories" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="710" y="490" width="290" height="40" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
