@@ -13,7 +13,7 @@ import com.example.bookstoreapi.dto.response.BookResponse;
 import com.example.bookstoreapi.mapper.BookMapper;
 import com.example.bookstoreapi.repository.BookRepository;
 import org.springframework.data.domain.Pageable;
-
+import com.example.bookstoreapi.exception.custom.AuthorHasBooksException;
 import java.util.List;
 
 
@@ -69,6 +69,10 @@ public class AuthorServiceImpl implements AuthorService {
     public void delete(Long id) {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Author not found with id: " + id));
+
+        if (bookRepository.existsByAuthorId(id)) {
+            throw new AuthorHasBooksException("Cannot delete author with id " + id + " because it has associated books");
+        }
 
         authorRepository.delete(author);
     }
